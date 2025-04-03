@@ -6,6 +6,7 @@ class Respondent extends User {
   public isGroupLeader: boolean;
 
   constructor(
+    userID: string,
     firstName: string,
     lastName: string,
     email: string,
@@ -15,7 +16,7 @@ class Respondent extends User {
     orgID: string,
     isGroupLeader: boolean
   ) {
-    super(firstName, lastName, email);
+    super(userID, firstName, lastName, email);
     this.availability = availability;
     this.attributes = attributes;
     this.groupID = groupID;
