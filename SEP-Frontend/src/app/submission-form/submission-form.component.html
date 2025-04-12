@@ -1,0 +1,50 @@
+<form [formGroup]="submissionForm" (ngSubmit)="onSubmit()">
+  <label>
+    Name:
+    <input type="text" formControlName="name">
+  </label>
+  <br>
+
+  <label>
+    Email:
+    <input type="email" formControlName="email">
+  </label>
+  <br><br>
+
+  <fieldset formGroupName="availability">
+    <legend>Availability</legend>
+    <label><input type="checkbox" formControlName="monday"> Monday</label>
+    <label><input type="checkbox" formControlName="tuesday"> Tuesday</label>
+    <label><input type="checkbox" formControlName="wednesday"> Wednesday</label>
+    <label><input type="checkbox" formControlName="thursday"> Thursday</label>
+    <label><input type="checkbox" formControlName="friday"> Friday</label>
+  </fieldset>
+  <br>
+
+  <fieldset formGroupName="attributes">
+    <legend>Attributes</legend>
+    <label>
+      Class:
+      <select formControlName="class">
+        <option value="">-- Select --</option>
+        <option value="Freshman">Freshman</option>
+        <option value="Sophomore">Sophomore</option>
+        <option value="Junior">Junior</option>
+        <option value="Senior">Senior</option>
+      </select>
+    </label>
+    <br>
+    <label>
+      Gender:
+      <select formControlName="gender">
+        <option value="">-- Select --</option>
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Other">Other</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <br>
+  <button type="submit" [disabled]="submissionForm.invalid">Submit</button>
+</form>
