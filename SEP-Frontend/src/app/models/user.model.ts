@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   public userID: string;
   public firstName: string;
   public lastName: string;

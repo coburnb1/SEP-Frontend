@@ -1,4 +1,4 @@
-class Respondent extends User {
+class RespondentModel extends UserModel {
   public availability: string[];
   public attributes: string[];
   public groupID: string;

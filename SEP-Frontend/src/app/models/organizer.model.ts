@@ -1,4 +1,4 @@
-class Organizer extends User {
+class OrganizerModel extends UserModel {
   public password: string;
   public organizationID: string[];
 
