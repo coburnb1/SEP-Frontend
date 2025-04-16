@@ -15,9 +15,16 @@ describe('SubmissionFormComponent', () => {
     fixture = TestBed.createComponent(SubmissionFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.submissionForm.get('attributes.interests')?.setValue([]);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should allow multiple interests to be selected', () => {
+    const interestsControl = component.submissionForm.get('attributes.interests');
+    interestsControl?.setValue(['Gaming', 'Cooking', 'Reading']);
+    expect(interestsControl?.value).toEqual(['Gaming', 'Cooking', 'Reading']);
   });
 });

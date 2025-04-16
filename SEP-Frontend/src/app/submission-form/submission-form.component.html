@@ -11,6 +11,12 @@
   </label>
   <br><br>
 
+  <label>
+    Organization Name:
+    <input type="text" formControlName="organizationName">
+  </label>
+  <br><br>
+
   <fieldset formGroupName="availability">
     <legend>Availability</legend>
     <label><input type="checkbox" formControlName="monday"> Monday</label>
@@ -35,12 +41,23 @@
     </label>
     <br>
     <label>
-      Gender:
-      <select formControlName="gender">
+      Interests:
+      <select formControlName="interests" multiple>
         <option value="">-- Select --</option>
-        <option value="Female">Female</option>
-        <option value="Male">Male</option>
-        <option value="Other">Other</option>
+        <option value="iOS">iOS</option>
+        <option value="Android">Android</option>
+        <option value="Web Development">Web Development</option>
+        <option value="UI/UX Design">UI/UX Design</option>
+        <option value="Machine Learning">Machine Learning</option>
+        <option value="Startups">Startups</option>
+        <option value="Gaming">Gaming</option>
+        <option value="Reading">Reading</option>
+        <option value="Music">Music</option>
+        <option value="Art">Art</option>
+        <option value="Volunteering">Volunteering</option>
+        <option value="Cooking">Cooking</option>
+        <option value="Travel">Travel</option>
+        <option value="Sports">Sports</option>
       </select>
     </label>
   </fieldset>

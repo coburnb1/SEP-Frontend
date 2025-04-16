@@ -27,7 +27,7 @@ export class SubmissionFormComponent implements OnInit {
       }),
       attributes: this.fb.group({
         class: ['', Validators.required],
-        gender: ['', Validators.required]
+        interests: [[]]
       })
     });
   }
