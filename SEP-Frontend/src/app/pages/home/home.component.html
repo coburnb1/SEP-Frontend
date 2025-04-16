@@ -1,7 +1,104 @@
-<body>
-<h1>This is the Home Page for {{ name() }} </h1>
-<button (click)='name.set("")'> Update Value</button>
-  <a [routerLink]="'/group'">
-    Navigate to group page
-  </a>
-</body>
+<div class="body">
+
+  <div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+    <div class="row w-100">
+      <div class="col-12">
+        <h1 class="text-center">Welcome to NexTime</h1>
+        <p class="text-center">This is your new favorite place to create groups for your organizations</p>
+        <br>
+        <br>
+      </div>
+      <div class="col-12 text-center">
+        <h4 class="text-center">Add your first organization!</h4>
+        <br>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Create New Organization
+        </button>
+        <br>
+        <br>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- create new popup -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New Organization</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-2">
+
+          <div class="form-floating mb-2">
+            <input class="form-control" id="floatingInput" placeholder="Organization Name">
+            <label for="floatingInput">Organization Name</label>
+          </div>
+          <button class="btn btn-info mb-2 float-end" id="addAttribute">Add Attribute</button>
+        </div>
+        <div class="mb-3">
+
+          <!-- Container where new fields will be appended -->
+          <div id="attributeContainer">
+            <div class="collapse" id="homeCollapse">
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- JavaScript to handle dynamic form field addition -->
+        <script>
+          document.getElementById("addAttribute").addEventListener("click", function () {
+            // Create container for the attribute + its response options
+            var attributeBlock = document.createElement("div");
+            attributeBlock.classList.add("mb-4", "p-3");
+
+            // Create the initial structure
+            attributeBlock.innerHTML = `
+                <input type="text" class="form-control mb-2" placeholder="Attribute Name">
+
+                <div class="response-options ms-3">
+                  <input type="text" class="form-control mb-2" placeholder="Response Option">
+                  <input type="text" class="form-control mb-2" placeholder="Response Option">
+                </div>
+
+                <div class="mt-2">
+                  <button type="button" class="btn btn-secondary me-2 float-end" onclick="addOption(this)">Add Option</button>
+                  <button type="button" class="btn btn-danger me-2 float-end" onclick="this.closest('.mb-4').remove()">Remove</button>
+                </div>
+              `;
+
+            // Append the new block to the container
+            document.getElementById("attributeContainer").appendChild(attributeBlock);
+          });
+
+          // Function to add a new response option input above the buttons
+          function addOption(button) {
+            const responseContainer = button.closest(".mb-4").querySelector(".response-options");
+
+            const newOption = document.createElement("input");
+            newOption.type = "text";
+            newOption.placeholder = "Response Option";
+            newOption.className = "form-control mb-2";
+
+            responseContainer.appendChild(newOption);
+          }
+        </script>
+
+      </div>
+      <div class="modal-footer">
+        <label>Generate Link</label>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><i class="bi bi-link"></i></button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
