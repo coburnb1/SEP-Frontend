@@ -11,5 +11,5 @@ import {UserService} from "../../services/user.service";
 export class GroupPageComponent {
   constructor(private userService: UserService) {}
 
-  currentUserList: UserModel[] = this.userService.getAllUsers() ?? [];
+  //currentUserList: UserModel[] = this.userService.getAllUsers() ?? [];
 }

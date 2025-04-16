@@ -1,1 +1,69 @@
-<p>header works!</p>
+<div class="pos-f-t">
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand mx-auto" href="#">NexTime</a>
+    <button class="btn btn-secondary me-3" type="button">
+      <span><i class="bi bi-gear"></i></span>
+    </button>
+  </nav>
+</div>
+
+<!-- side panel -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="dropdown">
+      <div class="flex-shrink-0 bg-white" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+          <svg class="bi me-2" width="30" height="24">
+            <use xlink:href="#bootstrap" />
+          </svg>
+          <span class="fs-5 fw-semibold">NexTime</span>
+        </a>
+        <!--Typescript will assist in loading in the content called from the database-->
+        <ul class="list-unstyled ps-0">
+          <!-- Dropdown the desired object-->
+          <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#homeCollapse" aria-expanded="false">
+              Organization Name <!-- This is the name of the organization that will be displayed in the sidebar -->
+            </button>
+            <div class="collapse" id="homeCollapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark rounded">Group 1</a></li>
+                <li><a href="#" class="link-dark rounded">Group 2</a></li>
+                <li><a href="#" class="link-dark rounded">Group 3</a></li>
+                <li><a href="#" class="link-dark rounded">Group 4</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="border-top my-3"></li> <!-- cutesy separator :)-->
+
+
+          <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#orgCollapse" aria-expanded="false">
+              Organization Name <!-- This is the name of the organization that will be displayed in the sidebar -->
+            </button>
+
+            <div class="collapse" id="orgCollapse">
+              <!-- in order to make this drop down work, we will have to ingrepent the data-bs-target number and the div id...-->
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark rounded">Group 1</a></li>
+                <li><a href="#" class="link-dark rounded">Group 2</a></li>
+                <li><a href="#" class="link-dark rounded">Group 3</a></li>
+                <li><a href="#" class="link-dark rounded">Group 4</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="border-top my-3"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
