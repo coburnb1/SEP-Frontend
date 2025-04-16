@@ -55,7 +55,7 @@
         <script>
           document.getElementById("addAttribute").addEventListener("click", function () {
             // Create container for the attribute + its response options
-            var attributeBlock = document.createElement("div");
+            let attributeBlock = document.createElement("div");
             attributeBlock.classList.add("mb-4", "p-3");
 
             // Create the initial structure
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="mt-2">
-                  <button type="button" class="btn btn-secondary me-2 float-end" onclick="addOption(this)">Add Option</button>
+                  <button type="button" class="btn btn-secondary me-2 float-end" onclick="addOption(this)">Add Option</button> //need to troubleshoot angular options to preform this function
                   <button type="button" class="btn btn-danger me-2 float-end" onclick="this.closest('.mb-4').remove()">Remove</button>
                 </div>
               `;
