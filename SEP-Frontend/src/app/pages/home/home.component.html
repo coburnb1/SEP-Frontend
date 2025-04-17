@@ -35,60 +35,28 @@
         <div class="mb-2">
 
           <div class="form-floating mb-2">
-            <input class="form-control" id="floatingInput" placeholder="Organization Name">
+            <input class="form-control" id="floatingInput" placeholder="Organization Name" [(ngModel)]="organizationName" name="orgName">
             <label for="floatingInput">Organization Name</label>
           </div>
-          <button class="btn btn-info mb-2 float-end" id="addAttribute">Add Attribute</button>
+          <button class="btn btn-info mb-2 float-end" (click)="addAttribute()">Add Attribute</button>
         </div>
         <div class="mb-3">
 
-          <!-- Container where new fields will be appended -->
-          <div id="attributeContainer">
-            <div class="collapse" id="homeCollapse">
+          <div *ngFor="let attr of attributes; let i = index" class="mb-4 p-3 border rounded">
+            <input type="text" class="form-control mb-2" placeholder="Attribute Name" [(ngModel)]="attr.name" [name]="'attrName' + i">
 
+            <div class="response-options ms-3">
+              <div *ngFor="let option of attr.options; let j = index">
+                <input type="text" class="form-control mb-2" placeholder="Response Option" [(ngModel)]="attr.options[j]" [name]="'option' + i + '_' + j">
+              </div>
+            </div>
 
+            <div class="mt-3 text-end">
+              <button type="button" class="btn btn-secondary me-2" (click)="addOption(i)">Add Option</button>
+              <button type="button" class="btn btn-danger" (click)="removeAttribute(i)">Remove</button>
             </div>
           </div>
         </div>
-
-        <!-- JavaScript to handle dynamic form field addition -->
-        <script>
-          document.getElementById("addAttribute").addEventListener("click", function () {
-            // Create container for the attribute + its response options
-            let attributeBlock = document.createElement("div");
-            attributeBlock.classList.add("mb-4", "p-3");
-
-            // Create the initial structure
-            attributeBlock.innerHTML = `
-                <input type="text" class="form-control mb-2" placeholder="Attribute Name">
-
-                <div class="response-options ms-3">
-                  <input type="text" class="form-control mb-2" placeholder="Response Option">
-                  <input type="text" class="form-control mb-2" placeholder="Response Option">
-                </div>
-
-                <div class="mt-2">
-                  <button type="button" class="btn btn-secondary me-2 float-end" onclick="addOption(this)">Add Option</button> //need to troubleshoot angular options to preform this function
-                  <button type="button" class="btn btn-danger me-2 float-end" onclick="this.closest('.mb-4').remove()">Remove</button>
-                </div>
-              `;
-
-            // Append the new block to the container
-            document.getElementById("attributeContainer").appendChild(attributeBlock);
-          });
-
-          // Function to add a new response option input above the buttons
-          function addOption(button) {
-            const responseContainer = button.closest(".mb-4").querySelector(".response-options");
-
-            const newOption = document.createElement("input");
-            newOption.type = "text";
-            newOption.placeholder = "Response Option";
-            newOption.className = "form-control mb-2";
-
-            responseContainer.appendChild(newOption);
-          }
-        </script>
 
       </div>
       <div class="modal-footer">
@@ -99,6 +67,3 @@
     </div>
   </div>
 </div>
-
-
-
