@@ -18,7 +18,6 @@
         <br>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -42,18 +41,18 @@
         </div>
         <div class="mb-3">
 
-          <div *ngFor="let attr of attributes; let i = index" class="mb-4 p-3 border rounded">
-            <input type="text" class="form-control mb-2" placeholder="Attribute Name" [(ngModel)]="attr.name" [name]="'attrName' + i">
+          <div *ngFor="let attribute of attributes; let attributeIndex = index" class="mb-4 p-3 border rounded">
+            <input type="text" class="form-control mb-2" placeholder="Attribute Name" [(ngModel)]="attribute.name" [name]="'attrName' + attributeIndex">
 
             <div class="response-options ms-3">
-              <div *ngFor="let option of attr.options; let j = index">
-                <input type="text" class="form-control mb-2" placeholder="Response Option" [(ngModel)]="attr.options[j]" [name]="'option' + i + '_' + j">
+              <div *ngFor="let option of attribute.options; let optionIndex = index">
+                <input type="text" class="form-control mb-2" placeholder="Response Option" [(ngModel)]="attribute.options[optionIndex]" [name]="'option' + attributeIndex + '_' + optionIndex">
               </div>
             </div>
 
             <div class="mt-3 text-end">
-              <button type="button" class="btn btn-secondary me-2" (click)="addOption(i)">Add Option</button>
-              <button type="button" class="btn btn-danger" (click)="removeAttribute(i)">Remove</button>
+              <button type="button" class="btn btn-secondary me-2" (click)="addOption(attributeIndex)">Add Option</button>
+              <button type="button" class="btn btn-danger" (click)="removeAttribute(attributeIndex)">Remove</button>
             </div>
           </div>
         </div>
