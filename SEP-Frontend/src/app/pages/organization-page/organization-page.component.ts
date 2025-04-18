@@ -1,13 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';import {HeaderComponent} from "../core/header/header.component";
-import {FooterComponent} from "../core/footer/footer.component";
+import { FormsModule } from '@angular/forms';
 import {RouterLink} from "@angular/router";
+import {CalendarComponent} from '../core/calendar/calendar.component';
 
 @Component({
   selector: 'app-organization-page',
   standalone: true,
-  imports: [NgFor, NgIf, FormsModule, RouterLink],
+  imports: [NgFor, NgIf, FormsModule, RouterLink, CalendarComponent],
   templateUrl: './organization-page.component.html',
   styleUrl: './organization-page.component.scss'
 })

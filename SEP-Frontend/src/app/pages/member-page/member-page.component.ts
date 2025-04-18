@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-member-page',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './member-page.component.scss'
 })
 export class MemberPageComponent {
-
+  @Input() memberName?: string;
 }
