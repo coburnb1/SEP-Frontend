@@ -56,7 +56,7 @@
       <div class="row">
         <div class="p-3">
           <button type="button" class="btn btn-lg btn-primary float-end me-3" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal">
+            data-bs-target="#exampleModal">
             <i class="bi bi-plus-circle-dotted "></i>
           </button>
           <button type="button" class="btn btn-lg btn-primary float-end me-3"><!--refresh data-->
@@ -64,9 +64,11 @@
           </button>
 
           <!--button appears when organization is selected-->
-          <a class="btn btn-lg btn-primary float-end me-3" role="button" *ngIf="isButtonVisible" href="#">
-            <i class="bi bi-people-fill"></i>
-          </a>
+          @if (isButtonVisible) {
+            <a class="btn btn-lg btn-primary float-end me-3" role="button" href="#">
+              <i class="bi bi-people-fill"></i>
+            </a>
+          }
 
         </div>
         <div>
@@ -96,20 +98,22 @@
           <button class="btn btn-info mb-2 float-end" (click)="addAttribute()">Add Attribute</button>
         </div>
         <div class="mb-3">
-          <div *ngFor="let attr of attributes; let i = index" class="mb-4 p-3 border rounded">
-            <input type="text" class="form-control mb-2" placeholder="Attribute Name" [(ngModel)]="attr.name" [name]="'attrName' + i">
-
-            <div class="response-options ms-3">
-              <div *ngFor="let option of attr.options; let j = index">
-                <input type="text" class="form-control mb-2" placeholder="Response Option" [(ngModel)]="attr.options[j]" [name]="'option' + i + '_' + j">
+          @for (attr of attributes; track attr; let i = $index) {
+            <div class="mb-4 p-3 border rounded">
+              <input type="text" class="form-control mb-2" placeholder="Attribute Name" [(ngModel)]="attr.name" [name]="'attrName' + i">
+              <div class="response-options ms-3">
+                @for (option of attr.options; track option; let j = $index) {
+                  <div>
+                    <input type="text" class="form-control mb-2" placeholder="Response Option" [(ngModel)]="attr.options[j]" [name]="'option' + i + '_' + j">
+                  </div>
+                }
+              </div>
+              <div class="mt-3 text-end">
+                <button type="button" class="btn btn-secondary me-2" (click)="addOption(i)">Add Option</button>
+                <button type="button" class="btn btn-danger" (click)="removeAttribute(i)">Remove</button>
               </div>
             </div>
-
-            <div class="mt-3 text-end">
-              <button type="button" class="btn btn-secondary me-2" (click)="addOption(i)">Add Option</button>
-              <button type="button" class="btn btn-danger" (click)="removeAttribute(i)">Remove</button>
-            </div>
-          </div>
+          }
         </div>
       </div>
       <div class="modal-footer">

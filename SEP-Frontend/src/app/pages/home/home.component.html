@@ -6,61 +6,63 @@
         <h1 class="text-center">Welcome to NexTime</h1>
         <p class="text-center">This is your new favorite place to create groups for your organizations</p>
         <br>
-        <br>
-      </div>
-      <div class="col-12 text-center">
-        <h4 class="text-center">Add your first organization!</h4>
-        <br>
-        <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Create New Organization
-        </button>
-        <br>
-        <br>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- create new popup -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create New Organization</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-2">
-
-          <div class="form-floating mb-2">
-            <input class="form-control" id="floatingInput" placeholder="Organization Name" [(ngModel)]="organizationName" name="orgName">
-            <label for="floatingInput">Organization Name</label>
+          <br>
           </div>
-          <button class="btn btn-info mb-2 float-end" (click)="addAttribute()">Add Attribute</button>
-        </div>
-        <div class="mb-3">
-          <div *ngFor="let attr of attributes; let i = index" class="mb-4 p-3 border rounded">
-            <input type="text" class="form-control mb-2" placeholder="Attribute Name" [(ngModel)]="attr.name" [name]="'attrName' + i">
+          <div class="col-12 text-center">
+            <h4 class="text-center">Add your first organization!</h4>
+            <br>
+              <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Create New Organization
+              </button>
+              <br>
+                <br>
+                </div>
+              </div>
 
-            <div class="response-options ms-3">
-              <div *ngFor="let option of attr.options; let j = index">
-                <input type="text" class="form-control mb-2" placeholder="Response Option" [(ngModel)]="attr.options[j]" [name]="'option' + i + '_' + j">
+            </div>
+          </div>
+
+
+          <!-- create new popup -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Create New Organization</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-2">
+
+                    <div class="form-floating mb-2">
+                      <input class="form-control" id="floatingInput" placeholder="Organization Name" name="orgName" [(ngModel)]="organizationName">
+                      <label for="floatingInput">Organization Name</label>
+                    </div>
+                    <button class="btn btn-info mb-2 float-end" (click)="addAttribute()">Add Attribute</button>
+                  </div>
+                  <div class="mb-3">
+                    @for (attr of attributes(); track attr; let i = $index) {
+                      <div class="mb-4 p-3 border rounded">
+                        <input type="text" class="form-control mb-2" placeholder="Attribute Name" [(ngModel)]="attr.name" [name]="'attrName' + i">
+                        <div class="response-options ms-3">
+                          @for (option of attr.options; track j; let j = $index) {
+                            <div>
+                              <input type="text" class="form-control mb-2" placeholder="Response Option" [(ngModel)]="attr.options[j]" [name]="'option' + i + '_' + j">
+                            </div>
+                          }
+                        </div>
+                        <div class="mt-3 text-end">
+                          <button type="button" class="btn btn-secondary me-2" (click)="addOption(i)">Add Option</button>
+                          <button type="button" class="btn btn-danger" (click)="removeAttribute(i)">Remove</button>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <label>Generate Link</label>
+                  <a type="button" class="btn btn-secondary" data-bs-dismiss="modal" href="/group"><i class="bi bi-link"></i></a>
+                </div>
               </div>
             </div>
-
-            <div class="mt-3 text-end">
-              <button type="button" class="btn btn-secondary me-2" (click)="addOption(i)">Add Option</button>
-              <button type="button" class="btn btn-danger" (click)="removeAttribute(i)">Remove</button>
-            </div>
           </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <label>Generate Link</label>
-        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal" href="/group"><i class="bi bi-link"></i></a>
-      </div>
-    </div>
-  </div>
-</div>
