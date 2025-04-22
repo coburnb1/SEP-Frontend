@@ -1,7 +1,6 @@
 export interface User {
   userID: string;
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
-  fullName?: string;
+  organizations: Array<string>;
 }
