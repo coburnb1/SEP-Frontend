@@ -6,6 +6,6 @@ import {OrganizationPageComponent} from "./pages/organization-page/organization-
 export const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, pathMatch: 'full'},
-  {path: 'group', component: GroupPageComponent, pathMatch: 'full'},
+  {path: 'groups', component: GroupPageComponent, pathMatch: 'full'},
   {path: 'orgs', component: OrganizationPageComponent, pathMatch: 'full'}
 ];
