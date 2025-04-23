@@ -2,7 +2,8 @@ import {Component, effect, signal} from '@angular/core';
 
 import { FormsModule } from '@angular/forms';import {HeaderComponent} from "../core/header/header.component";
 import {FooterComponent} from "../core/footer/footer.component";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent {
   organizationName: string = '';
   attributes = signal<{name: string; options: string[]}[]>([]);
 
-  constructor() {
+  constructor(userService: UserService, private router: Router,) {
     effect(() => {
       console.log('this.organizationName: ', this.organizationName);
       console.log('this.attributes: ', this.attributes());
