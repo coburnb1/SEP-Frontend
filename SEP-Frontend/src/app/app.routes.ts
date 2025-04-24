@@ -5,6 +5,7 @@ import {OrganizationPageComponent} from "./pages/organization-page/organization-
 import {SettingsComponent} from "./pages/settings/settings.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {AuthGuard} from "./guards/auth.guard";
+import {GroupPageComponent} from "./pages/group-page/group-page.component";
 
 export const routes: Routes = [
   {
@@ -18,7 +19,10 @@ export const routes: Routes = [
   },
   {path: 'login', component: LoginComponent, pathMatch: 'full'},
   {path: 'home', component: HomeComponent, pathMatch: 'full'},
-  //{path: 'groups', component: GroupPageComponent, pathMatch: 'full'},
-  {path: 'orgs', component: OrganizationPageComponent, pathMatch: 'full'},
+  {path: 'groups/:groupNumber', component: GroupPageComponent},
+  {
+    path: 'orgs/:orgId',
+    component: OrganizationPageComponent
+  },
   {path: 'settings', component: SettingsComponent, pathMatch: 'full'}
 ];

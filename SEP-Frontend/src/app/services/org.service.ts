@@ -8,30 +8,62 @@ import {OrgResponse} from "../models/org-response.model";
   providedIn: 'root'
 })
 export class OrgService {
-  orgs = signal<Org[]>([])
-  constructor(private http: HttpClient, private router: Router) {
-    effect(() => {
+  orgs = signal<Org[]>([]);
+  availabilityByGroup = signal<Record<string, { day: string, start: string, end: string }[]>>({});
 
+
+  constructor(private http: HttpClient, private router: Router) {
+    const storedOrgs = localStorage.getItem('orgs');
+    if (storedOrgs) {
+      this.orgs.set(JSON.parse(storedOrgs));
+    }
+
+    effect(() => {
+      localStorage.setItem('orgs', JSON.stringify(this.orgs()));
     });
   }
 
-  getOrgsFromOrganizerId(organizerId: string)  {
+  getOrgsFromOrganizerId(organizerId: string) {
     this.http.get<OrgResponse>(`http://localhost:5010/api/orgs/${organizerId}/retrieve-all`).subscribe((response) => {
-      if (response) {
-        console.log('response', response);
-        if (response._id) {
-          this.orgs().push({
-            id: response._id,
-            name: response.nanme,
-            organizerId: response.organizer_id,
-            groupSize: response.group_size,
-            attributeList: []
-          })
+      console.log('ORG API RESPONSE:', response);
+
+      if (Array.isArray(response)) {
+        const current = this.orgs();
+        const newOrgs: Org[] = [];
+
+        for (const org of response) {
+          const alreadyExists = current.some(o => o.id === org._id);
+          if (!alreadyExists) {
+            newOrgs.push({
+              id: org._id,
+              name: org.nanme, // 🤦‍♂️ yes, sir, we'll allow it
+              organizerId: org.organizer_id,
+              groupSize: org.group_size,
+              attributeList: []
+            });
+          }
         }
+
+        const updated = [...current, ...newOrgs];
+        this.orgs.set(updated);
+        localStorage.setItem('orgs', JSON.stringify(updated));
+      } else {
+        console.error('Unexpected response format for orgs');
       }
-      else {
-        console.log('could not get orgs');
-      }
+    });
+  }
+
+  clearOrgs() {
+    this.orgs.set([]);
+    localStorage.removeItem('orgs');
+  }
+
+
+  getGroupAvailability(orgId: string) {
+    this.http.get<Record<string, { day: string, start: string, end: string }[]>>(
+      `http://localhost:5010/api/orgs/${orgId}/get-groups-availability`
+    ).subscribe((data) => {
+      localStorage.setItem('org-availability', JSON.stringify(data));
     });
   }
 }

@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserResponse} from "../models/user-response.model";
 import {User} from "../models/user.model";
 import {OrgService} from "./org.service";
+import {GroupService} from "./group.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,30 @@ export class UserService {
     name: '',
     organizations: []
   })
-  constructor(private http: HttpClient, private router: Router, orgService: OrgService) {
+  constructor(private http: HttpClient, private router: Router, orgService: OrgService,
+              groupService: GroupService,) {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user.set(JSON.parse(storedUser));
+      this.loggedIn = true;
+    }
+
     effect(() => {
-      if (this.user().userID !== '') {
-        orgService.getOrgsFromOrganizerId(this.user().userID)
-        console.log(orgService.orgs())
+      const userVal = this.user();
+      if (userVal.userID !== '') {
+        localStorage.setItem('user', JSON.stringify(userVal));
+        orgService.getOrgsFromOrganizerId(userVal.userID);
       }
-    })
+    });
+    effect(() => {
+      const userVal = this.user();
+      const orgs = orgService.orgs();
+
+      if (userVal.userID !== '' && orgs.length && groupService.respondents().length === 0) {
+        const firstOrg = orgs[0]; // or pick dynamically
+        groupService.getRespondents(firstOrg.id);
+      }
+    });
   }
 
   login(email: string, password: string)  {
@@ -44,5 +62,17 @@ export class UserService {
         console.log('wrong email or password');
       }
     });
+  }
+
+  logout() {
+    this.user.set({
+      userID: '',
+      email: '',
+      name: '',
+      organizations: []
+    });
+    localStorage.removeItem('user');
+    this.loggedIn = false;
+    this.router.navigate(['/login']);
   }
 }

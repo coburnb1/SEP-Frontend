@@ -1,5 +1,5 @@
-import {Component, effect} from '@angular/core';
-import {UserService} from "../../services/user.service";
+import {Component} from '@angular/core';
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-settings',
@@ -9,10 +9,19 @@ import {UserService} from "../../services/user.service";
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
-  constructor(userService: UserService){
-    console.log(userService.user());
-    effect(() => {
-      console.log('from settings component ', userService.user());
-    })
+  name?: string;
+  email?: string;
+
+  constructor() {
+    const storedUser = localStorage.getItem('user');
+
+    if (storedUser) {
+      const user: User = JSON.parse(storedUser);
+
+      if (user.userID !== '') {
+        this.name = user.name;
+        this.email = user.email;
+      }
+    }
   }
 }

@@ -1,21 +1,30 @@
-import {Component, effect} from '@angular/core';
-import {UserService} from "../../../services/user.service";
+import { Component, effect, signal } from '@angular/core';
+import { UserService } from '../../../services/user.service';
+import { Org } from '../../../models/org.model';
+import {DecimalPipe, NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
   templateUrl: './header.component.html',
+  imports: [
+    DecimalPipe,
+    NgForOf
+  ],
   styleUrl: './header.component.scss'
 })
-
 export class HeaderComponent {
-  loggedIn: Boolean = false;
+  orgs = signal<Org[]>([]);
 
   constructor(private userService: UserService) {
     effect(() => {
-      if (this.userService.user().userID !== '') {
-        this.loggedIn = true;
+      const user = this.userService.user();
+      if (user.userID !== '') {
+
+        const storedOrgs = localStorage.getItem('orgs');
+        if (storedOrgs) {
+          this.orgs.set(JSON.parse(storedOrgs));
+        }
       }
     });
   }

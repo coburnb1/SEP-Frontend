@@ -1,46 +1,57 @@
-<!--<div class="body pt-5">
-  <div class="container-fluid d-flex justify-content-center">
-    <div class="col-12 col-md-3 border rounded m-2 mb-1">
-      <div class="row">
+<div class="body pt-5">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+
+      <!-- GROUP SIDEBAR -->
+      <div class="col-12 col-md-3 border rounded m-2 mb-1">
         <div class="p-4">
           <h3 class="text-center">Groups</h3>
           <hr />
-          <div class="p-4 pb-1 pt-1" *ngFor="let group of groups">
-            <h4 class="text-start">{{ group.name }}</h4>
+          <div class="p-4 pb-1 pt-1">
+            <h4 class="text-start">Group {{ groupNumber }}</h4>
             <div class="row ms-4">
               <div class="col-sm text-start p-2">
-
+                <ul class="list-unstyled">
+                  <li *ngFor="let member of groupMembers">
+                    {{ member.name }}
+                  </li>
+                </ul>
               </div>
             </div>
             <hr />
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-12 col-md-7 border rounded m-2">
-      <div class="row">
-        <div class="p-3">
-          <button type="button"
-                  class="btn btn-lg btn-primary float-end me-3"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  aria-label="Add new item">
-            <i class="bi bi-plus-circle-dotted"></i>
-          </button>
-          <button type="button"
-                  class="btn btn-lg btn-primary float-end me-3"
-                  aria-label="Refresh data"
-                  (click)="refreshData()">
-            <i class="bi bi-arrow-repeat"></i>
-          </button>
-          <a class="btn btn-lg btn-primary float-end me-3"
-             role="button"
-             href="#"
-             aria-label="View user profile">
-            <i class="bi bi-person-fill"></i>
-          </a>
+
+      <!-- RIGHT PANEL: Buttons + Calendar -->
+      <div class="col-12 col-md-7 border rounded m-2">
+
+        <!-- BUTTONS ROW -->
+        <div class="row">
+          <div class="col-12 p-3 d-flex justify-content-end gap-3 flex-wrap">
+            <a class="btn btn-lg btn-primary" href="#" aria-label="View user profile">
+              <i class="bi bi-person-fill"></i>
+            </a>
+            <button class="btn btn-lg btn-primary" (click)="refreshData()" aria-label="Refresh data">
+              <i class="bi bi-arrow-repeat"></i>
+            </button>
+            <button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-label="Add new item">
+              <i class="bi bi-plus-circle-dotted"></i>
+            </button>
+          </div>
         </div>
+
+        <!-- CALENDAR DIRECTLY UNDER BUTTONS -->
+        <div class="row">
+          <div class="col-12 group-calendar-wrapper mt-3">
+            <app-group-calendar
+              [groupNumber]="groupNumber">
+            </app-group-calendar>
+          </div>
+        </div>
+
       </div>
+
     </div>
   </div>
-</div>-->
+</div>

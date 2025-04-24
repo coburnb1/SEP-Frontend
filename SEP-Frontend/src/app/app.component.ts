@@ -17,8 +17,4 @@ export class AppComponent {
   constructor(private titleService: Title) {
     this.titleService.setTitle('NexTime');
   }
-  routes = [
-    { path: 'home', component: HomeComponent, title: 'NexTime | Home' },
-    ,
-  ];
 }
